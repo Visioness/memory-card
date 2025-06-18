@@ -13,4 +13,4 @@ function Card({ frontImage, backImage }) {
   );
 }
 
-export default Board;
+export default Card;
