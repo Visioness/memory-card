@@ -1,0 +1,44 @@
+.card {
+  background: transparent;
+  perspective: 1000px;
+  width: clamp(120px, 15vw, 180px);
+  height: clamp(160px, 20vw, 240px);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  border: 1px solid;
+  transform-style: preserve-3d;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-back img {
+  filter: sepia(100%);
+}
