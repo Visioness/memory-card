@@ -1,12 +1,13 @@
 import '../styles/App.css';
 import Board from './Board.jsx';
-import cards from '../data/cards.js';
+import cardList from '../data/cardList.js';
+import { useEffect } from 'react';
 
 function App() {
   return (
     <>
       <div className="app">
-        <Board cards={cards} />
+        <Board cardList={cardList} />
       </div>
       <footer className="footer">
         <p>
