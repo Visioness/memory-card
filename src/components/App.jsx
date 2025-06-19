@@ -8,11 +8,11 @@ function App() {
       <div className="app">
         <Board cards={cards} />
       </div>
-      <div className="footer">
+      <footer className="footer">
         <p>
-          Created by <a href="https://github.com/visioness">visioness</a>
+          Created by <a href="https://github.com/visioness">Visioness</a>
         </p>
-      </div>
+      </footer>
     </>
   );
 }
