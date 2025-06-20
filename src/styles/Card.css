@@ -7,8 +7,12 @@
   flex-shrink: 0;
 }
 
+.card .card-inner {
+  animation: flipBack 0.8s linear forwards;
+}
+
 .card.flipped .card-inner {
-  transform: rotateY(-180deg);
+  animation: flipFront 0.8s linear forwards;
 }
 
 .card-inner {
@@ -17,7 +21,6 @@
   height: 100%;
   border: 1px solid;
   transform-style: preserve-3d;
-  transition: transform 0.8s ease-in-out;
 }
 
 .card-front,
@@ -43,12 +46,22 @@
   filter: sepia(100%);
 }
 
-@keyframes flip {
+@keyframes flipFront {
   from {
     transform: rotateY(0deg);
   }
 
   to {
     transform: rotateY(180deg);
+  }
+}
+
+@keyframes flipBack {
+  from {
+    transform: rotateY(180deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
   }
 }

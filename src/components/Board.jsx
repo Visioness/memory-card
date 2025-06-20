@@ -1,16 +1,10 @@
 import '../styles/Board.css';
 import Card from './Card.jsx';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function Board({ boardSize, cardList, setGamePhase }) {
   const [cardSet, setCardSets] = useState(getRandomSet(boardSize));
-  const [allCards, setAllCards] = useState('closed');
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAllCards('open');
-    }, 1000);
-  }, []);
+  const [allCards, setAllCards] = useState('open');
 
   function getRandomSet(size = 12) {
     const copyCardList = [...cardList];

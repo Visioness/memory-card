@@ -12,7 +12,6 @@ function Card({
 }) {
   const [cardState, setCardState] = useState('closed');
   const [isChosenBefore, setIsChosenBefore] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const onClick = () => {
     if (isChosenBefore) {
@@ -20,8 +19,7 @@ function Card({
       return;
     }
 
-    if (cardState === 'open' && allCards === 'open' && !isAnimating) {
-      setIsAnimating(true);
+    if (cardState === 'open' && allCards === 'open') {
       setIsChosenBefore(true);
       setCardState('closed');
 
@@ -30,7 +28,6 @@ function Card({
         setTimeout(() => {
           shuffleCards();
           setAllCards('open');
-          setIsAnimating(false);
         }, 1000);
       }, 1000);
     }
@@ -43,11 +40,7 @@ function Card({
   const isFlipped = cardState === 'open' && allCards === 'open';
 
   return (
-    <div
-      className={`card ${isFlipped ? 'flipped' : ''} ${isAnimating ? 'animating' : ''}`}
-      data-id={id}
-      onClick={onClick}
-    >
+    <div className={`card ${isFlipped ? 'flipped' : ''}`} data-id={id} onClick={onClick}>
       <div className="card-inner">
         <div className="card-front">
           <img src={frontImage} alt="Front of card" />
