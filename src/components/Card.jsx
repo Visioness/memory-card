@@ -1,24 +1,53 @@
 import '../styles/Card.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function Card({ id, frontImage, backImage, onAnimationEnd }) {
+function Card({
+  id,
+  frontImage,
+  backImage,
+  allCards,
+  setAllCards,
+  shuffleCards,
+  setGamePhase,
+}) {
+  const [cardState, setCardState] = useState('closed');
+  const [isChosenBefore, setIsChosenBefore] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
 
-  const flipCard = () => {
-    if (isAnimating) return;
+  const onClick = () => {
+    if (isChosenBefore) {
+      setGamePhase('Game Over');
+      return;
+    }
 
-    setIsAnimating(true);
-    setIsFlipped(true);
+    if (cardState === 'open' && allCards === 'open' && !isAnimating) {
+      setIsAnimating(true);
+      setIsChosenBefore(true);
+      setCardState('closed');
+
+      setTimeout(() => {
+        setAllCards('closed');
+        setTimeout(() => {
+          shuffleCards();
+          setAllCards('open');
+          setIsAnimating(false);
+        }, 1000);
+      }, 1000);
+    }
   };
 
-  const handleAnimationEnd = () => {
-    setIsAnimating(false);
-    onAnimationEnd();
-  };
+  useEffect(() => {
+    setCardState(allCards);
+  }, [allCards]);
+
+  const isFlipped = cardState === 'open' && allCards === 'open';
 
   return (
-    <div className={`card ${isAnimating ? 'flipped' : ''}`} data-id={id} onClick={flipCard} onAnimationEnd={handleAnimationEnd}>
+    <div
+      className={`card ${isFlipped ? 'flipped' : ''} ${isAnimating ? 'animating' : ''}`}
+      data-id={id}
+      onClick={onClick}
+    >
       <div className="card-inner">
         <div className="card-front">
           <img src={frontImage} alt="Front of card" />

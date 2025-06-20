@@ -8,7 +8,7 @@
 }
 
 .card.flipped .card-inner {
-  animation: flip 1s 2 ease-in-out alternate;
+  transform: rotateY(-180deg);
 }
 
 .card-inner {
@@ -17,6 +17,7 @@
   height: 100%;
   border: 1px solid;
   transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
 }
 
 .card-front,
@@ -34,17 +35,17 @@
   object-fit: cover;
 }
 
-.card-back {
+.card-front {
   transform: rotateY(180deg);
 }
 
-.card-back img {
+.card-front img {
   filter: sepia(100%);
 }
 
 @keyframes flip {
   from {
-    transform: rotateY(0);
+    transform: rotateY(0deg);
   }
 
   to {

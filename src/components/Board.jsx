@@ -1,16 +1,25 @@
 import '../styles/Board.css';
 import Card from './Card.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function Board({ cardList }) {
-  const [cardSet, setCardSets] = useState(getRandomSet());
-  
-  function getRandomSet(size=12) {
+function Board({ boardSize, cardList, setGamePhase }) {
+  const [cardSet, setCardSets] = useState(getRandomSet(boardSize));
+  const [allCards, setAllCards] = useState('closed');
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAllCards('open');
+    }, 1000);
+  }, []);
+
+  function getRandomSet(size = 12) {
     const copyCardList = [...cardList];
     const newCardSet = [];
-    
+
     for (let i = 0; i < size; i++) {
-      newCardSet.push(copyCardList.splice(Math.floor(Math.random() * copyCardList.length), 1)[0]);
+      newCardSet.push(
+        copyCardList.splice(Math.floor(Math.random() * copyCardList.length), 1)[0]
+      );
     }
 
     return newCardSet;
@@ -18,17 +27,13 @@ function Board({ cardList }) {
 
   function shuffleCards() {
     const shuffledCards = [...cardSet];
-      
+
     for (let i = shuffledCards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
     }
 
     setCardSets(shuffledCards);
-  }
-
-  function onAnimationEnd() {
-    shuffleCards();
   }
 
   return (
@@ -39,7 +44,10 @@ function Board({ cardList }) {
           id={card.id}
           frontImage={card.frontImage}
           backImage={card.backImage}
-          onAnimationEnd={onAnimationEnd}
+          allCards={allCards}
+          setAllCards={setAllCards}
+          shuffleCards={shuffleCards}
+          setGamePhase={setGamePhase}
         />
       ))}
     </div>
