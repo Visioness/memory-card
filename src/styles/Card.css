@@ -3,16 +3,32 @@
   perspective: 1000px;
   width: clamp(120px, 15vw, 180px);
   height: clamp(160px, 20vw, 240px);
-  cursor: pointer;
   flex-shrink: 0;
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.card .card-inner {
+.card.flipped {
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.card.flip-to-front .card-inner {
+  animation: flipFront 0.8s linear forwards;
+}
+
+.card.flip-to-back .card-inner {
   animation: flipBack 0.8s linear forwards;
 }
 
+.card .card-inner {
+  transform: rotateY(0deg);
+}
+
 .card.flipped .card-inner {
-  animation: flipFront 0.8s linear forwards;
+  transform: rotateY(180deg);
 }
 
 .card-inner {

@@ -19,6 +19,14 @@ function Game() {
     if (gamePhase === 'Playing') setScore(0);
   }, [gamePhase]);
 
+  useEffect(() => {
+    if (score === boardSize) setGamePhase('Game Over');
+  }, [score]);
+
+  function incrementScore() {
+    setScore(score + 1);
+  }
+
   return (
     <>
       <header className="header">
@@ -50,12 +58,19 @@ function Game() {
         </div>
       ) : gamePhase === 'Playing' ? (
         <div className="game">
-          <Board boardSize={boardSize} cardList={cardList} setGamePhase={setGamePhase} />
+          <Board
+            boardSize={boardSize}
+            cardList={cardList}
+            setGamePhase={setGamePhase}
+            incrementScore={incrementScore}
+          />
         </div>
       ) : (
         <div className="game-over">
-          <h1>Game Over</h1>
-          <p>You scored {score} points</p>
+          <h1>{score === boardSize ? 'You Won!' : 'Game Over'}</h1>
+          <p>
+            You correctly guessed {score} cards out of {boardSize}.
+          </p>
           <button className="restart-button" onClick={() => setGamePhase('Menu')}>
             Restart
           </button>
