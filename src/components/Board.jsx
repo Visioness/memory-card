@@ -104,7 +104,7 @@ function Board({ boardSize, cardList, setGamePhase, incrementScore }) {
         scale: 1,
         stagger: {
           amount: 0.6,
-          from: 'center',
+          from: 'edges',
         },
       });
 

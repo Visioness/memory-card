@@ -5,22 +5,15 @@
   height: clamp(160px, 20vw, 240px);
   flex-shrink: 0;
   cursor: default;
-  opacity: 0.5;
   pointer-events: none;
+  filter: grayscale(50%);
 }
 
 .card.flipped {
   cursor: pointer;
   pointer-events: auto;
   opacity: 1;
-}
-
-.card.flip-to-front .card-inner {
-  animation: flipFront 0.8s linear forwards;
-}
-
-.card.flip-to-back .card-inner {
-  animation: flipBack 0.8s linear forwards;
+  filter: none;
 }
 
 .card .card-inner {
@@ -60,24 +53,4 @@
 
 .card-front img {
   filter: sepia(100%);
-}
-
-@keyframes flipFront {
-  from {
-    transform: rotateY(0deg);
-  }
-
-  to {
-    transform: rotateY(180deg);
-  }
-}
-
-@keyframes flipBack {
-  from {
-    transform: rotateY(180deg);
-  }
-
-  to {
-    transform: rotateY(0deg);
-  }
 }

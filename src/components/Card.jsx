@@ -1,5 +1,7 @@
 import '../styles/Card.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 function Card({
   id,
@@ -13,7 +15,59 @@ function Card({
 }) {
   const [cardState, setCardState] = useState('closed');
   const [isChosenBefore, setIsChosenBefore] = useState(false);
-  const [animationType, setAnimationType] = useState('flip-to-front');
+  const cardRef = useRef(null);
+  const cardInnerRef = useRef(null);
+  const isAnimating = useRef(false);
+
+  const animateFlipToFront = () => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+
+    gsap.to(cardInnerRef.current, {
+      duration: 0.8,
+      rotationY: 180,
+      scale: 1.05,
+      ease: 'back.inOut(2)',
+      transformOrigin: 'center center',
+      onComplete: () => {
+        gsap.to(cardInnerRef.current, {
+          scale: 1,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+        setCardState('open');
+        isAnimating.current = false;
+      },
+    });
+  };
+
+  const animateFlipToBack = () => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+
+    gsap.to(cardInnerRef.current, {
+      duration: 0.8,
+      rotationY: 0,
+      scale: 1.05,
+      ease: 'back.inOut(2)',
+      transformOrigin: 'center center',
+      onComplete: () => {
+        gsap.to(cardInnerRef.current, {
+          scale: 1,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+        setCardState('closed');
+        isAnimating.current = false;
+
+        if (allCards === 'open') {
+          setAllCards('closed');
+        } else if (allCards === 'closed') {
+          shuffleCards();
+        }
+      },
+    });
+  };
 
   const onClick = () => {
     if (isChosenBefore) {
@@ -23,45 +77,36 @@ function Card({
 
     if (cardState === 'open' && allCards === 'open') {
       setIsChosenBefore(true);
-      setAnimationType('flip-to-back');
+      animateFlipToBack();
       incrementScore();
     }
   };
 
   useEffect(() => {
     if (cardState === 'closed' && allCards === 'open') {
-      setAnimationType('flip-to-front');
+      animateFlipToFront();
     } else if (cardState === 'open' && allCards === 'closed') {
-      setAnimationType('flip-to-back');
+      animateFlipToBack();
     }
   }, [allCards]);
 
-  const handleAnimationEnd = (e) => {
-    if (e.animationName === 'flipBack') {
-      setCardState('closed');
-      setAnimationType('');
-
-      if (allCards === 'open') {
-        setAllCards('closed');
-      } else if (allCards === 'closed') {
-        shuffleCards();
-      }
-    } else if (e.animationName === 'flipFront') {
-      setCardState('open');
-      setAnimationType('');
-    }
-  };
-
   const isFlipped = cardState === 'open' && allCards === 'open';
+
+  useGSAP(
+    () => {
+      gsap.set(cardInnerRef.current, { rotationY: 0 });
+    },
+    { scope: cardRef }
+  );
 
   return (
     <div
-      className={`card ${isFlipped ? 'flipped' : ''} ${animationType}`}
+      className={`card ${isFlipped ? 'flipped' : ''}`}
       data-id={id}
       onClick={onClick}
-      onAnimationEnd={handleAnimationEnd}
+      ref={cardRef}
     >
-      <div className="card-inner">
+      <div className="card-inner" ref={cardInnerRef}>
         <div className="card-front">
           <img src={frontImage} alt="Front of card" />
         </div>
