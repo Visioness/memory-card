@@ -1,4 +1,4 @@
-import '../styles/App.css';
+import '../styles/Game.css';
 import Board from './Board.jsx';
 import cardList from '../data/cardList.js';
 import { useState, useEffect } from 'react';
@@ -40,17 +40,49 @@ function Game() {
 
       {gamePhase === 'Menu' ? (
         <div className="menu">
-          <h1>Memory Game</h1>
+          <h2>Set Difficulty</h2>
           <div className="difficulty-buttons">
-            <button className="difficulty-button" onClick={() => setDifficulty('Easy')}>
-              Easy
-            </button>
-            <button className="difficulty-button" onClick={() => setDifficulty('Medium')}>
-              Medium
-            </button>
-            <button className="difficulty-button" onClick={() => setDifficulty('Hard')}>
-              Hard
-            </button>
+            <label
+              className={`difficulty-option ${difficulty === 'Easy' ? 'active' : ''}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value="Easy"
+                checked={difficulty === 'Easy'}
+                onChange={(e) => setDifficulty(e.target.value)}
+              />
+              <span className="radio-custom"></span>
+              <span className="difficulty-text">Easy (5 cards)</span>
+            </label>
+
+            <label
+              className={`difficulty-option ${difficulty === 'Medium' ? 'active' : ''}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value="Medium"
+                checked={difficulty === 'Medium'}
+                onChange={(e) => setDifficulty(e.target.value)}
+              />
+              <span className="radio-custom"></span>
+              <span className="difficulty-text">Medium (8 cards)</span>
+            </label>
+
+            <label
+              className={`difficulty-option ${difficulty === 'Hard' ? 'active' : ''}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value="Hard"
+                checked={difficulty === 'Hard'}
+                onChange={(e) => setDifficulty(e.target.value)}
+              />
+              <span className="radio-custom"></span>
+              <span className="difficulty-text">Hard (12 cards)</span>
+            </label>
           </div>
           <button className="start-button" onClick={() => setGamePhase('Playing')}>
             Start Game

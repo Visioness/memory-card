@@ -6,7 +6,6 @@ import { useGSAP } from '@gsap/react';
 function Card({
   id,
   frontImage,
-  backImage,
   allCards,
   setAllCards,
   shuffleCards, // This is now the animateShuffle function from Board
@@ -70,6 +69,8 @@ function Card({
   };
 
   const onClick = () => {
+    if (isAnimating.current) return;
+
     if (isChosenBefore) {
       setGamePhase('Game Over');
       return;
@@ -110,9 +111,7 @@ function Card({
         <div className="card-front">
           <img src={frontImage} alt="Front of card" />
         </div>
-        <div className="card-back">
-          <img src={backImage} alt="Back of card" />
-        </div>
+        <div className="card-back royal-red"></div>
       </div>
     </div>
   );
