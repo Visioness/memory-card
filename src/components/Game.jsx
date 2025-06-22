@@ -30,7 +30,7 @@ function Game() {
   return (
     <>
       <header className="header">
-        <h1>Memory Game</h1>
+        <h1>Avengers Memory</h1>
         {gamePhase === 'Playing' && (
           <div className="score-container">
             <p>
