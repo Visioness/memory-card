@@ -1,11 +1,125 @@
 .board {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   gap: 1rem;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
+
+  /* Enhanced features for dark theme */
+  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+  border: 2px solid #333;
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.4);
+
+  /* Subtle texture effect */
+  background-image: radial-gradient(
+      circle at 20% 50%,
+      rgba(117, 116, 184, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 20%, rgba(175, 73, 133, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.08) 0%, transparent 50%);
+
+  /* Smooth transition for any dynamic changes */
+  transition: all 0.3s ease;
+
+  /* Minimum height to prevent collapse */
+  min-height: 400px;
+
+  /* Ensure content doesn't overflow */
+  overflow: hidden;
+}
+
+/* Board loading state (if needed) */
+.board.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.board.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border: 10px solid #333;
+  border-top: 10px solid rgba(175, 73, 133, 0.8);
+  border-bottom: 10px solid rgba(120, 219, 255, 0.8);
+  border-radius: 50%;
+  animation: boardSpin 1s linear infinite;
+}
+
+@keyframes boardSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Subtle hover effect for the entire board */
+.board:hover {
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6), 0 6px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .board {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    min-height: 300px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    padding: 0.25rem;
+    gap: 0.25rem;
+    min-height: 250px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .board {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .board {
+    transition: none;
+  }
+
+  .board.loading::after {
+    animation: none;
+  }
+}
+
+/* Game state visual feedback */
+.board.game-won {
+  background: linear-gradient(135deg, #1a1a1a 0%, #1a2e1a 100%);
+  box-shadow: inset 0 0 30px rgba(76, 175, 80, 0.1), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.board.game-over {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2e1a1a 100%);
+  box-shadow: inset 0 0 30px rgba(244, 67, 54, 0.1), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Focus accessibility */
+.board:focus-within {
+  outline: 2px solid #2196f3;
+  outline-offset: 2px;
 }

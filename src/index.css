@@ -1,3 +1,16 @@
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #252525;
+  --bg-accent: #333333;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: #444444;
+  --button-primary: #4a4a4a;
+  --button-hover: #5a5a5a;
+  --success-color: #4caf50;
+  --danger-color: #f44336;
+}
+
 *,
 *::before,
 *::after {
@@ -8,4 +21,24 @@
 
 body {
   height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+button {
+  color: var(--primary-text);
+  background-color: var(--primary-background);
+  border-color: var(--primary-border);
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button:hover {
+  color: var(--hover-text);
+  background-color: var(--hover-background);
+  border-color: var(--hover-border);
 }
