@@ -1,16 +1,5 @@
-/* Dark Theme Variables */
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #252525;
-  --bg-accent: #333333;
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --border-color: #444444;
-  --button-primary: #4a4a4a;
-  --button-hover: #5a5a5a;
-  --success-color: #4caf50;
-  --danger-color: #f44336;
-  --active-color: #2196f3;
+  --active-color: #3b89c9;
   --active-glow: rgba(33, 150, 243, 0.3);
 }
 
@@ -24,15 +13,16 @@
 /* Header Styles */
 .header {
   background-color: var(--bg-secondary);
+  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
   padding: 1rem 2rem;
   text-align: center;
-  border-bottom: 2px solid var(--border-color);
 }
 
 .header h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+  letter-spacing: 0.1em;
 }
 
 .score-container {
@@ -47,7 +37,7 @@
 /* Menu Styles */
 .menu {
   background-color: var(--bg-secondary);
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
   padding: 3rem 2rem;
   border-radius: 12px;
@@ -59,6 +49,11 @@
   font-size: 2rem;
   margin-bottom: 2rem;
   color: var(--text-primary);
+}
+
+.difficulty-container {
+  width: max-content;
+  margin: auto;
 }
 
 .difficulty-buttons {
@@ -74,6 +69,7 @@
 
 /* Custom Radio Button Styles */
 .difficulty-option {
+  max-width: 300px;
   display: flex;
   align-items: center;
   padding: 1rem 1.5rem;
@@ -100,7 +96,7 @@
 }
 
 .difficulty-option.active:hover {
-  background-color: #1976d2;
+  background-color: #5998d6;
 }
 
 /* Hide default radio button */
@@ -147,6 +143,57 @@
   font-weight: 500;
 }
 
+/* Info Container Styles */
+.info {
+  background-color: var(--bg-accent);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.info h3 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.info hr {
+  border: none;
+  height: 4px;
+  background: linear-gradient(to right, transparent, var(--border-color), transparent);
+  margin: 1rem 0 1.5rem 0;
+}
+
+.info ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style-type: none;
+}
+
+.info li {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.info li:last-child {
+  margin-bottom: 0;
+}
+
+.info li::before {
+  content: '•';
+  color: var(--active-color);
+  font-weight: bold;
+  position: absolute;
+  left: -1.2rem;
+}
+
 .start-button,
 .restart-button {
   background-color: var(--success-color);
@@ -187,12 +234,6 @@
   text-align: center;
 }
 
-.game-over h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--success-color);
-}
-
 .game-over p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
@@ -213,9 +254,9 @@
 /* Footer Styles */
 .footer {
   background-color: var(--bg-secondary);
+  background: linear-gradient(to top, var(--bg-secondary), var(--bg-primary));
   padding: 1rem;
   text-align: center;
-  border-top: 2px solid var(--border-color);
 }
 
 .footer p {
@@ -232,6 +273,22 @@
 .footer a:hover {
   color: var(--success-color);
   text-decoration: underline;
+}
+
+.score,
+.board-size {
+  font-family: 'Amarante', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transform: rotateZ(3deg);
+  display: inline-block;
+}
+
+.game-over-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  color: #ffffff;
 }
 
 /* Responsive Design */

@@ -7,8 +7,22 @@
   --border-color: #444444;
   --button-primary: #4a4a4a;
   --button-hover: #5a5a5a;
-  --success-color: #4caf50;
-  --danger-color: #f44336;
+  --success-color: #336835;
+  --danger-color: #752e29;
+}
+
+@font-face {
+  font-family: 'Avengers';
+  src: url('./assets/fonts/Avengers.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Amarante';
+  src: url('./assets/fonts/Amarante-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
 }
 
 *,
@@ -23,6 +37,7 @@ body {
   height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  font-family: 'Avengers', sans-serif;
 }
 
 button {

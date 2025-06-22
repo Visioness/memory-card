@@ -33,60 +33,77 @@ function Game() {
         <h1>Memory Game</h1>
         {gamePhase === 'Playing' && (
           <div className="score-container">
-            <p>Score: {score}</p>
+            <p>
+              Score: <span className="score">&nbsp;{score}</span> /{' '}
+              <span className="board-size">&nbsp;{boardSize}</span>
+            </p>
           </div>
         )}
       </header>
 
       {gamePhase === 'Menu' ? (
         <div className="menu">
-          <h2>Set Difficulty</h2>
-          <div className="difficulty-buttons">
-            <label
-              className={`difficulty-option ${difficulty === 'Easy' ? 'active' : ''}`}
-            >
-              <input
-                type="radio"
-                name="difficulty"
-                value="Easy"
-                checked={difficulty === 'Easy'}
-                onChange={(e) => setDifficulty(e.target.value)}
-              />
-              <span className="radio-custom"></span>
-              <span className="difficulty-text">Easy (5 cards)</span>
-            </label>
+          <div className="difficulty-container">
+            <h2>Set Difficulty</h2>
+            <div className="difficulty-buttons">
+              <label
+                className={`difficulty-option ${difficulty === 'Easy' ? 'active' : ''}`}
+              >
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="Easy"
+                  checked={difficulty === 'Easy'}
+                  onChange={(e) => setDifficulty(e.target.value)}
+                />
+                <span className="radio-custom"></span>
+                <span className="difficulty-text">Easy</span>
+              </label>
 
-            <label
-              className={`difficulty-option ${difficulty === 'Medium' ? 'active' : ''}`}
-            >
-              <input
-                type="radio"
-                name="difficulty"
-                value="Medium"
-                checked={difficulty === 'Medium'}
-                onChange={(e) => setDifficulty(e.target.value)}
-              />
-              <span className="radio-custom"></span>
-              <span className="difficulty-text">Medium (8 cards)</span>
-            </label>
+              <label
+                className={`difficulty-option ${difficulty === 'Medium' ? 'active' : ''}`}
+              >
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="Medium"
+                  checked={difficulty === 'Medium'}
+                  onChange={(e) => setDifficulty(e.target.value)}
+                />
+                <span className="radio-custom"></span>
+                <span className="difficulty-text">Medium</span>
+              </label>
 
-            <label
-              className={`difficulty-option ${difficulty === 'Hard' ? 'active' : ''}`}
-            >
-              <input
-                type="radio"
-                name="difficulty"
-                value="Hard"
-                checked={difficulty === 'Hard'}
-                onChange={(e) => setDifficulty(e.target.value)}
-              />
-              <span className="radio-custom"></span>
-              <span className="difficulty-text">Hard (12 cards)</span>
-            </label>
+              <label
+                className={`difficulty-option ${difficulty === 'Hard' ? 'active' : ''}`}
+              >
+                <input
+                  type="radio"
+                  name="difficulty"
+                  value="Hard"
+                  checked={difficulty === 'Hard'}
+                  onChange={(e) => setDifficulty(e.target.value)}
+                />
+                <span className="radio-custom"></span>
+                <span className="difficulty-text">Hard</span>
+              </label>
+            </div>
           </div>
           <button className="start-button" onClick={() => setGamePhase('Playing')}>
             Start Game
           </button>
+          <div className="info">
+            <h3>How to Play</h3>
+            <hr />
+            <ul>
+              <li>
+                Click a card to choose it. When you have chosen a card, the cards will be
+                closed and shuffled.
+              </li>
+              <li>Then try to guess another card that you have not chosen yet.</li>
+              <li>If you guess correctly, you get a point. If not, game is over.</li>
+            </ul>
+          </div>
         </div>
       ) : gamePhase === 'Playing' ? (
         <div className="game">
@@ -99,9 +116,12 @@ function Game() {
         </div>
       ) : (
         <div className="game-over">
-          <h1>{score === boardSize ? 'You Won!' : 'Game Over'}</h1>
+          <h1 className="game-over-title">
+            {score === boardSize ? 'You Won!' : 'Game Over'}
+          </h1>
           <p>
-            You correctly guessed {score} cards out of {boardSize}.
+            You correctly guessed <span className="score">&nbsp;{score}</span> cards out
+            of <span className="board-size">&nbsp;{boardSize}</span>.
           </p>
           <button className="restart-button" onClick={() => setGamePhase('Menu')}>
             Restart
