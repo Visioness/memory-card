@@ -1,13 +1,11 @@
-import imagePlaceholder from '../assets/icons/placeholder-160x200.svg';
+const imageModules = import.meta.glob('../assets/icons/avengers*.webp', {
+  eager: true,
+  import: 'default',
+});
 
-const cardList = [];
-
-for (let i = 0; i < 20; i++) {
-  cardList.push({
-    id: crypto.randomUUID(),
-    frontImage: imagePlaceholder,
-    backImage: imagePlaceholder,
-  });
-}
+const cardList = Object.values(imageModules).map((image) => ({
+  id: crypto.randomUUID(),
+  frontImage: image,
+}));
 
 export default cardList;
